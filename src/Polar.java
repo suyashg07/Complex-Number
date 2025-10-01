@@ -4,7 +4,7 @@
 
 public class Polar extends ComplexNumber {
 
-    private double r;
+    final private double r;
     private double theta;
     public Polar(double r, double theta) {
         this.r = r;

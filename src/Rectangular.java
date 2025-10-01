@@ -4,8 +4,9 @@
  */
 
 public class Rectangular extends ComplexNumber {
-    private double real;
-    private double imag;
+
+    final private double real;
+    final private double imag;
 
     public Rectangular(double real, double imag) {
         this.real = real;
@@ -28,7 +29,7 @@ public class Rectangular extends ComplexNumber {
             if (imag >= 0) return Math.atan(this.imag/this.real) + Math.PI;
             else return Math.atan(this.imag/this.real) - Math.PI;
         }
-        else if(real == 0 && imag == 0) return 0;
+        else if(this.real == 0 && this.imag == 0) return 0;
         return Math.atan(this.imag/this.real);
     }
 
@@ -47,6 +48,9 @@ public class Rectangular extends ComplexNumber {
         return this;
     }
 
+    /**
+     * Returns the complex number in polar format.
+     */
     @Override
     public Polar toComplexPolar() {
         return new Polar(this.modulus(), this.phase());
