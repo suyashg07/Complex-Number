@@ -311,12 +311,13 @@ public abstract class ComplexNumber {
      *         returned as {@link Polar} if both inputs are polar, otherwise as {@link Rectangular}
      * @throws IllegalArgumentException if either {@code a} or {@code b} is {@code null}
      */
-    public static ComplexNumber power(ComplexNumber a, ComplexNumber b) {
+    public static ComplexNumber power(ComplexNumber a, ComplexNumber b) throws IllegalArgumentException {
         if (a == null || b == null)
             throw new IllegalArgumentException("Input complex numbers must not be null.");
 
         double n1 = Math.pow(a.modulus(), b.real()) * Math.pow(Math.E, -b.imag()*a.phase());
         double n2 = b.imag() * Math.log(a.modulus()) + b.real() * a.phase();
+        
         Polar soln = new Polar(n1, n2);
 
         if(a instanceof Polar && b instanceof Polar)
@@ -383,10 +384,10 @@ public abstract class ComplexNumber {
      * @return the sine of {@code z} as a {@link ComplexNumber}
      */
     public static ComplexNumber sin(ComplexNumber z) {
-        ComplexNumber z1 = power(Math.E, multiply(I, z));
-        ComplexNumber z2 = power(Math.E, multiply(-1, I, z));
+        ComplexNumber z1 = power(Math.E, multiply(I, z)); //e^iz
+        ComplexNumber z2 = power(Math.E, multiply(-1, I, z)); //e^-iz
 
-        return divide(subtract(z1, z2), multiply(2, I));
+        return divide(subtract(z1, z2), multiply(2, I)); //(e^iz - e^-iz) / 2i
     }
 
     /**
@@ -403,10 +404,10 @@ public abstract class ComplexNumber {
      * @return the cosine of {@code z} as a {@link ComplexNumber}
      */
     public static ComplexNumber cos(ComplexNumber z) {
-        ComplexNumber z1 = power(Math.E, multiply(I, z));
-        ComplexNumber z2 = power(Math.E, multiply(-1, I, z));
+        ComplexNumber z1 = power(Math.E, multiply(I, z)); //e^iz
+        ComplexNumber z2 = power(Math.E, multiply(-1, I, z)); //e^-iz
 
-        return divide(add(z1, z2), 2);
+        return divide(add(z1, z2), 2); // (e^iz + e^-iz) / 2
     }
 
     /**
